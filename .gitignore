@@ -2,6 +2,9 @@ movie/data/*.csv
 movie/data/all.csv
 movie/data/all-old.csv
 
+Recommender/src/data/train/
+Recommender/src/data/test/
+
 .DS_Store
 service_account.json
 tempCodeRunnerFile.py

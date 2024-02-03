@@ -22,9 +22,12 @@ simirarity_type = "pearson"  # "pearson" or "cosine"
 prompt_type = "few_shot_ja"  # "zero_shot_ja" or "few_shot_ja"
 
 # Train Files
-baseline_train_file_name = f"./data/train/explicit/explicit_train_u{N_TRAIN_USERS}.csv"
-explicit_train_file_name = f"./data/train/explicit/explicit_train_u{N_TRAIN_USERS}.csv"
-implicit_train_file_name = f"./data/train/implicit/implicit_train_{prompt_type}_u{N_TRAIN_USERS}.csv"
+baseline_train_file_name = f"./data/train/explicit/explicit_train_u{
+    N_TRAIN_USERS}.csv"
+explicit_train_file_name = f"./data/train/explicit/explicit_train_u{
+    N_TRAIN_USERS}.csv"
+implicit_train_file_name = f"./data/train/implicit/implicit_train_{
+    prompt_type}_u{N_TRAIN_USERS}.csv"
 
 # Test Files
 test_file_name = f"./data/test/test_existing_users_r{N_TEST}.csv"
@@ -75,9 +78,6 @@ def main():
                                                  verbose=False)
     baseline_pearson_knn.fit(baseline_trainset)
     baseline_pearson_knn_predicted = baseline_pearson_knn.test(testset)
-    baseline_pearson_evaluation = Evaluation(predicted=baseline_pearson_knn_predicted,
-                                             at_k=AT_K,
-                                             threshold=THRESHOLD)
 
     # Baseline Model: Ecplicit Personal Value Model
     explicit_pv_knn = surprise.KNNWithMeans(k=NEIGHBOR_K,
@@ -87,10 +87,7 @@ def main():
                                             verbose=False)
     explicit_pv_knn.fit(explicit_trainset)
     explicit_pv_knn_predicted = explicit_pv_knn.pv_test(testset=testset,
-                                                            sim=explicit_sim_matrix)
-    explicit_pv_knn_evaluation = Evaluation(predicted=explicit_pv_knn_predicted,
-                                            at_k=AT_K,
-                                            threshold=THRESHOLD)
+                                                        sim=explicit_sim_matrix)
 
     # Proposed Model: Implicit Personal Value Model
     implicit_pv_knn = surprise.KNNWithMeans(k=NEIGHBOR_K,
@@ -100,10 +97,41 @@ def main():
                                             verbose=False)
     implicit_pv_knn.fit(implicit_trainset)
     implicit_pv_predicted = implicit_pv_knn.pv_test(testset=testset,
-                                                        sim=implicit_sim_matrix)
+                                                    sim=implicit_sim_matrix)
+
+    """ Evaluation """
+    # Baseline Model: Pearson KNN
+    baseline_pearson_evaluation = Evaluation(predicted=baseline_pearson_knn_predicted,
+                                             at_k=AT_K,
+                                             threshold=THRESHOLD)
+    logger.info("Baseline Model: Pearson KNN Evaluation\n")
+    logger.info(f"Precision@{AT_K}: {baseline_pearson_evaluation.precision}")
+    logger.info(f"Recall@{AT_K}: {baseline_pearson_evaluation.recall}")
+    logger.info(f"F1@{AT_K}: {baseline_pearson_evaluation.f1}")
+    logger.info(f"RMSE: {baseline_pearson_evaluation.rmse}")
+
+    # Baseline Model: Ecplicit Personal Value Model
+    explicit_pv_knn_evaluation = Evaluation(predicted=explicit_pv_knn_predicted,
+                                            at_k=AT_K,
+                                            threshold=THRESHOLD)
+    logger.info("Baseline Model: Ecplicit Personal Value Model Evaluation\n")
+    logger.info("Baseline Model: Pearson KNN Evaluation\n")
+    logger.info(f"Precision@{AT_K}: {explicit_pv_knn_evaluation.precision}")
+    logger.info(f"Recall@{AT_K}: {explicit_pv_knn_evaluation.recall}")
+    logger.info(f"F1@{AT_K}: {explicit_pv_knn_evaluation.f1}")
+    logger.info(f"RMSE: {explicit_pv_knn_evaluation.rmse}")
+
+    # Proposed Model: Implicit Personal Value Model
     implicit_pv_evaluation = Evaluation(predicted=implicit_pv_predicted,
                                         at_k=AT_K,
                                         threshold=THRESHOLD)
+    logger.info("Proposed Model: Implicit Personal Value Model Evaluation\n")
+    logger.info("Baseline Model: Pearson KNN Evaluation\n")
+    logger.info(f"Precision@{AT_K}: {implicit_pv_evaluation.precision}")
+    logger.info(f"Recall@{AT_K}: {implicit_pv_evaluation.recall}")
+    logger.info(f"F1@{AT_K}: {implicit_pv_evaluation.f1}")
+    logger.info(f"RMSE: {implicit_pv_evaluation.rmse}")
+
 
 if __name__ == "__main__":
     main()
