@@ -3,7 +3,7 @@
 </div>
 
 <h1 align="center">Personal Value based Recommendation System from Review Texts Using Large Language Models </h1>
-<p align="center"><strong>Recommendation System from Review Texts Using Large Language Models</strong></p>
+<!-- <p align="center"><strong>Recommendation System from Review Texts Using Large Language Models</strong></p> -->
 
 ## Overview
 This proposed system is a method that constructs recommendation systems requiring explicit attribute evaluations by implicitly extracting user attribute evaluations from review texts using LLMs.
