@@ -33,7 +33,7 @@ def main():
                'movie', 'music', 'overall', 'created', 'title', 'review']
 
     users_review_data = pd.read_csv(
-        "../../movie/data/review_data_polarity_u-100_i-20.csv", names=columns)
+        f"../../movie/data/review_data_polarity_u-{N_USERS}_i-{N_REVIEWS}.csv", names=columns)
     logger.info(f"Downloaded users_review_data: {users_review_data.shape}")
 
     logger.info("Begin Extracting Polarity Data")
