@@ -1,0 +1,8 @@
+movie/data/*.csv
+movie/data/all.csv
+movie/data/all-old.csv
+
+.DS_Store
+service_account.json
+tempCodeRunnerFile.py
+.vscode/
