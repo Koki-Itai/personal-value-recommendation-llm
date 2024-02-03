@@ -81,6 +81,7 @@ Conducted comparative experiments on the following four methods.
    Personal-Value-based User-based Collaborative Filtering using KNN with Implicit Attribute Evaluations extracted by LLMs
 
 ### Experimental Result
+The proposed method (ICFPV) demonstrated recommendation accuracy equivalent to existing explicit methods. This result suggests the potential for constructing recommendation systems that require attribute evaluations on review sites where explicit attribute evaluations are not exist.
 
 |                      | **Precision@5** | **Recall@5** | **F1@5**  | **RMSE**  |
 | -------------------- | --------------- | ------------ | --------- | --------- |
@@ -100,3 +101,4 @@ Conducted comparative experiments on the following four methods.
 
 [4] 三澤 遼理, 服部 俊一, 高間 康史： 価値観に基づくユーザモデルによる協調フィルタリングの拡張手法の提案. 人工知能学会全国大会論文集, Vol. 28, pp. 1-2, No. 1H4-NFC-01a-5, 2014.
 
+[5] R. Han, T. Peng, X. Wan, et al.: Is information extraction solved by ChatGPT? an analysis of performance, evaluation criteria, robustness and errors. arXiv.org, arXiv:2305.14450, version 1.0, 2023.
